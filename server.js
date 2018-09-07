@@ -11,7 +11,7 @@ app.use(express.static('./public/dist'));
 io.on('connection', (socket) => {
   console.log('Usuário conectado');
 
-  board.on('ready', function(app) {
+  board.on('ready', function() {
 
     var led1 = new five.Led(2);
     var led2 = new five.Led(4);
