@@ -7,6 +7,10 @@ board.on('ready', function(app) {
   var http = require('http').Server(app);
   var io = require('socket.io')(http);
 
+  http.listen(process.env.PORT || 8085, function(){
+    console.log('listening on *:8085');
+  });
+
   var led1 = new five.Led(2);
   var led2 = new five.Led(4);
   var led3 = new five.Led(6);
@@ -29,10 +33,6 @@ board.on('ready', function(app) {
         led3.off();
       }
     });
-  });
-
-  http.listen(process.env.PORT || 8085, function(){
-    console.log('listening on *:8085');
   });
 
   app.use(express.static('./public/dist'));
