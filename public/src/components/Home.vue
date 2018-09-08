@@ -20,6 +20,13 @@
             </v-card>
           </v-flex>
         </v-layout>
+        {{slider}}
+        <v-flex xs12>
+          <v-slider
+            v-model="slider"
+            thumb-label="always"
+          ></v-slider>
+        </v-flex>
 
       </v-container>
     </v-content>
@@ -32,7 +39,7 @@ export default {
   name: 'CcHome',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      slider: 100
     }
   },
   methods: {
@@ -42,6 +49,12 @@ export default {
     turnOffLight () {
       $socket.emit('turnOnlight', false)
     }
+  },
+  created () {
+    let vm = this
+    $socket.on('potenciometer', v => {
+      vm.$data.slider = v
+    })
   }
 }
 </script>
